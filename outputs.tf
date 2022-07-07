@@ -8,7 +8,7 @@ output "cluster_id" {
 }
 
 output "cluster_crn" {
-  description = "ID of the cluster"
+  description = "CRN of the cluster"
   value       = ibm_container_vpc_cluster.cluster.crn
 }
 
