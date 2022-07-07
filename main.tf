@@ -64,7 +64,7 @@ resource "ibm_container_vpc_alb" "private_alb" {
 # Enable Public ALBs
 ##############################################################################
 
-resource "ibm_container_vpc_alb" "publice_alb" {
+resource "ibm_container_vpc_alb" "public_alb" {
   for_each = var.enable_public_albs != true ? {} : {
     for load_balancer in ibm_container_vpc_cluster.cluster.albs :
     (load_balancer.name) => load_balancer if load_balancer.alb_type == "public"
