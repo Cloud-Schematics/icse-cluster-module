@@ -44,3 +44,33 @@ resource "ibm_container_vpc_cluster" "cluster" {
 }
 
 ##############################################################################
+
+##############################################################################
+# Enable Private ALBs
+##############################################################################
+
+resource "ibm_container_vpc_alb" "private_alb" {
+  for_each = var.enable_private_albs != true ? {} : {
+    for load_balancer in ibm_container_vpc_cluster.cluster.albs :
+    (load_balancer.name) => load_balancer if load_balancer.alb_type == "private"
+  }
+  alb_id = each.value.id
+  enable = true
+}
+
+##############################################################################
+
+##############################################################################
+# Enable Public ALBs
+##############################################################################
+
+resource "ibm_container_vpc_alb" "publice_alb" {
+  for_each = var.enable_public_albs != true ? {} : {
+    for load_balancer in ibm_container_vpc_cluster.cluster.albs :
+    (load_balancer.name) => load_balancer if load_balancer.alb_type == "public"
+  }
+  alb_id = each.value.id
+  enable = true
+}
+
+##############################################################################

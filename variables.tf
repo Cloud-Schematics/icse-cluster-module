@@ -130,6 +130,18 @@ variable "disable_public_service_endpoint" {
   default     = false
 }
 
+variable "enable_public_albs" {
+  description = "Enable public Application Load Balancers for cluster"
+  type        = bool
+  default     = false
+}
+
+variable "enable_private_albs" {
+  description = "Enable Private Application Load Balancers for cluster"
+  type        = bool
+  default     = false
+}
+
 ##############################################################################
 
 ##############################################################################
